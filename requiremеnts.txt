@@ -1,0 +1,6 @@
+pprint
+requests
+reddit
+yadisk
+time
+tqdm
