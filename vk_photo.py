@@ -50,7 +50,7 @@ class VKontakte:
 
         return photos_json
 
-class YandexDisk(VKontakte):
+class YandexDisk:
     def __init__(self, token):
         self.yandex_url = 'https://cloud-api.yandex.net/'
         self.token = token
@@ -61,11 +61,11 @@ class YandexDisk(VKontakte):
             'Authorization': self.token
         }
 
-    def get_upload_link(self):
+    def get_upload_link(self, directory_name):
         photos_json = vk.get_photos()
         for json in photos_json:
             photo_url = json['url']
-            disk_file_path = f"Фото_VK/{json['file_name']}"
+            disk_file_path = f"{directory_name}/{json['file_name']}"
             upload_url = f'{self.yandex_url}v1/disk/resources/upload'
             headers = self.get_headers()
             params = {"path": disk_file_path, "url": photo_url}
@@ -81,4 +81,4 @@ if __name__ == '__main__':
     vk = VKontakte(token='TOKEN', id='ID')
     pprint(vk.get_photos())
     ya = YandexDisk(token='TOKEN')
-    ya.get_upload_link()
+    ya.get_upload_link(directory_name=input('Введи название папки: '))
