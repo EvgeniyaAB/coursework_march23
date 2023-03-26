@@ -1,7 +1,5 @@
 from pprint import pprint
 import requests
-import reddit
-import yadisk
 import time
 from tqdm import tqdm
 
